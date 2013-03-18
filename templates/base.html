@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}My amazing site{% endblock %}</title>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+	{% block css %}{% endblock %}
+	<script src="{{ STATIC_URL }}js/prefixfree.min.js" ></script>
+	<script src="{{ STATIC_URL }}js/prefixfree.min.js" ></script>
+	{% block script %}{% endblock %}
+<body>
+	<header>
+		
+	</header>
+	<nav>
+		{% block menu %}{% endblock %}
+	</nav>
+	<aside>
+		
+	</aside>
+	<section>
+		 {% block content %}{% endblock %}
+	</section>
+	<footer>
+		
+	</footer>
+</body>
+</html>
