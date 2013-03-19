@@ -122,12 +122,45 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.comments',
+     'social_auth',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'administracion',
     'comentarios',
     'publicaciones'
 )
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    #'social_auth.backends.google.GoogleOAuthBackend',
+    #'social_auth.backends.google.GoogleOAuth2Backend',
+    #'social_auth.backends.google.GoogleBackend',
+    #'social_auth.backends.OpenIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+#OAuth keys
+TWITTER_CONSUMER_KEY         = 'O4ClkG7rh9wfdDb6GQKAMA'
+TWITTER_CONSUMER_SECRET      = 'UXvixW2dNzB0iRb1h7LPyLiSBD9Awf7VcqJ9N7w'
+FACEBOOK_APP_ID              = '632838113408314'
+FACEBOOK_API_SECRET          = '147e0b01eb52d6a732bd05132140354a'
+#GOOGLE_CONSUMER_KEY          = ''
+#GOOGLE_CONSUMER_SECRET       = ''
+#GOOGLE_OAUTH2_CLIENT_ID      = ''
+#GOOGLE_OAUTH2_CLIENT_SECRET  = ''
+
+
+#Social Auth
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'es_ES'}
+
+
+LOGIN_URL = 'login/'
+LOGIN_REDIRECT_URL = '/cuentaUsuario'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
