@@ -1,29 +1,84 @@
+{% load publicaciones_tags %}
+{% load url from future %}
 <!doctype html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>{% block title %}My amazing site{% endblock %}</title>
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+	{% load staticfiles %}
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="{% static "css/normalize.css" %}">
+	<link rel="stylesheet" href="{% static "css/style.css" %}">
 	{% block css %}{% endblock %}
-	<script src="{{ STATIC_URL }}js/prefixfree.min.js" ></script>
-	<script src="{{ STATIC_URL }}js/prefixfree.min.js" ></script>
-	{% block script %}{% endblock %}
+	<script src="{% static "js/prefixfree.min.js" %}" ></script>
+	<script src="{% static "js/jquery.js" %}" ></script>
+	<script src="{% static "js/jquery.jqTransform.js" %}" ></script>
+	
 <body>
-	<header>
-		
-	</header>
-	<nav>
-		{% block menu %}{% endblock %}
-	</nav>
-	<aside>
-		
-	</aside>
-	<section>
-		 {% block content %}{% endblock %}
-	</section>
+	<div id="headerBox">
+		<header>
+			<figure id="logo">
+				<a href=""><img alt="Mangan Inc"  src="{% static "img/logo.png" %}"></a>
+			</figure>
+			<div class="loginBlock">
+				{% if user.is_authenticated %}
+					<div class="userBox">
+						<div>
+							Usuario: <strong>{{user.username}} </strong>
+						</div>
+						<div>
+							<a class="icon user" href="/user/edit"> </a> Editar Perfil
+						</div>
+						<div>
+							<a class="icon exit" href="/salir/"> </a> Salir del sistema
+						</div>
+					</div>
+				{% else %}
+					<a class="socialLogin socialFb" href="{% url "socialauth_begin" "facebook"%}"> Acceder por Facebook</a>
+					<a class="socialLogin socialTweet" href="{% url "socialauth_begin" "twitter" %}">Acceder por Twitter</a>
+					<a class="socialLogin socialGoo" href="{% url "socialauth_begin" "google" %}">Acceder por Google</a>
+				{% endif %}
+			</div>
+		</header>
+		<nav>
+			<ul class="menuPrincipal">
+				<li><a href="/">Inicio</a></li>
+				<li><a href="/categorias/">Categorias</a></li>
+				<li><a href="/generos/">Generos</a></li>
+				<li><a href="/fansub/">FANSUBS</a></li>
+				<li><a href="/registro/">Registro de FANSUBS</a></li>
+				<li><a href="/acceso/">Acceso</a></li>
+				<li><a href="/contactos/">Contáctenos</a></li>
+			</ul>
+		</nav>
+	</div>
+	<div id="page">
+		<aside>
+			{{ user|get_menus }}
+			{% block socialLink %}{% endblock %}
+			{% block publicidad1 %}{% endblock %}
+		</aside>
+		<section>
+			 {% if messages %}
+    			{% for message in messages %}
+    				<div {% if message.tags %} class="flashMessage {{ message.tags }}"{% endif %}>{{ message }}</div>
+    			{% endfor %}
+			{% endif %}			
+			{% block content %}{% endblock %}
+		</section>
+		{% block publicidad %}{% endblock %}
+	</div>
 	<footer>
-		
+		<div class="footerLeft">
+			<ul>
+				<li><a href="">Mapa del sitio</a></li>
+				<li><a href="">Termino de uso</a></li>
+			</ul>
+		</div>
+		<div class="footerRigth">
+			2013 Copyright Mangaink.com
+		</div>
 	</footer>
+	<script src="{% static "js/main.js" %}" ></script>
+	{% block script %}{% endblock %}
 </body>
 </html>

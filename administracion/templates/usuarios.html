@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load humanize %} 
+{% block title %}
+    MangaInk: Lista de usuarios - {{publicador}}
+{% endblock %}
+{% block content %}
+<h1 class="title4"> Lista de usuarios - {{publicador}}</h1>
+<div>
+
+<table class="datagrid">
+	<thead>
+	<tr>
+		<th>N. Usuario</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Correo</th>
+		<th>último acceso</th>
+		<th>Opciones</th>
+	</tr>
+	</thead>
+	<tbody>
+{% for usuario in publicador.user.all %}
+	<tr>
+		<td>{{usuario}}</td>
+		<td>{{usuario.first_name}}</td>
+		<td>{{usuario.last_name}}</td>
+		<td>{{usuario.email}}</td>
+		<td>{{ usuario.last_login|naturaltime }}</td>
+		<td>
+			{% if 'administracion.edit_user' in user.get_all_permissions %}
+			<a href="{% url 'administracion.views.userEdit' usuario.id %}" class="icon edit"></a>
+			{% endif %}
+			{% if 'administracion.del_user' in user.get_all_permissions and user.id != usuario.id %}
+				<a href="{% url 'administracion.views.userDelete' usuario.id %}" class="icon delete"></a>
+			{% endif %}
+		</td>
+	</tr>
+{% endfor %}
+	</tbody>
+</table>
+</div>
+{% endblock %}

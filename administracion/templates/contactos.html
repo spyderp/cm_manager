@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+    MangaInk: Contáctenos
+{% endblock %}
+{% block content %}
+    <h1 class="title1">Contacto</h1>
+    <article class="boxContent" >
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="nombre">Nombre</label>
+                <input name="nombre" type="text" required>
+            </div>
+            <div>
+                <label for="correo">Correo</label>
+                <input name="correo" type="email" required>
+            </div>
+            <div>
+                <label for="tema">Tema</label>
+                <select name="tema" id="tema" required>            
+                    <option value="">Seleccione...</option>
+                    <option value="Contacto">Contacto</option>
+                    <option value="DerechoAutor">Reclamo de derecho de autor</option>
+                    <option value="Abuso">Solicitud por abuso de usuario</option>
+                    <option value="Varios">Otros temas</option>
+                </select>
+            </div>
+            <div>
+                <label for="msg">Mensaje</label>
+                <textarea name="msg" id="message" cols="60" rows="5" required></textarea>
+            </div>
+            <input type="submit" value="Enviar">
+        </form>
+    </article>
+{% endblock %}

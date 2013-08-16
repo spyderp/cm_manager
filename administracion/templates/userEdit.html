@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}
+    MangaInk: Editar usuario de Fansub
+{% endblock %}
+{% block content %}
+<h1 class="title2">Editar Usuario Fansub</h1>
+<article class="boxContent">
+<form id="publicador_form" action="" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div>
+		{{formulario.username.label_tag}}
+		{{formulario.username}}
+		{{formulario.username.errors}}
+	</div>
+	<div>
+		{{formulario.first_name.label_tag}}
+		{{formulario.first_name}}
+		{{formulario.first_name.errors}}
+	</div>
+	<div>
+		{{formulario.last_name.label_tag}}
+		{{formulario.last_name}}
+		{{formulario.last_name.errors}}
+	</div>
+	<div>
+		{{formulario.email.label_tag}}
+		{{formulario.email}}
+		{{formulario.email.errors}}
+	</div>
+	<div>
+		{{formulario.is_active.label_tag}}
+		{{formulario.is_active}}
+		{{formulario.is_active.errors}}
+	</div>
+	<br>
+	<input type="submit" value="Guardar">
+	<input class="redirect" data-url="/fansub/usuarios" type="button" value="Cancelar">
+</form>
+</article>
+{% endblock %}

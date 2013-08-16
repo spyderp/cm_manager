@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}
+    Solicitud de registro de Fansub
+{% endblock %}
+{% block content %}
+	<h1 class="title3">Solicitud de registro de Fansub</h1>
+	<article class="boxContent">
+		<p>
+			Llene el siguiente formulario de registro si desea usted o un grupo de amigos formar parte de nuestra comunidad y ayudarnos publicando sus traducciones. 
+		</p>
+		<p>
+			La persona que llene el formulario sera el administrador del grupo y podra inscribir o asociar cuanto miembro el desee. Como Fansub podra publicar capitulos de manga, solicitar la publicación de nueva serie, editar capitulos que tu grupo subiera, ver los comentario y votaciones de tus publicaciones y muchas opciones más las cuales iremos ampliando con el tiempo
+		</p>
+		<p>
+			Recuerda llenar los datos de manera correcta y leer los terminos y condiciones. 
+			Los fansub que incumplas con estos terminos podran ser bloqueado de manera temporal o permanente y todo los archivos subidos no seran accesibles.
+		</p>
+
+		<form id="publicador_form" action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ formulario.non_field_errors }}
+			<fieldset>
+				<legend>Datos del Fansub</legend>
+				<div>
+					
+					<label for="id_publicador-nombre">Nombre</label>
+					{{formulario.nombre}}
+					{{formulario.nombre.errors}}
+				</div>
+				<div>
+					
+					<label for="id_publicador-lema">Lema</label>
+					{{formulario.lema}}
+					{{formulario.lema.errors}}
+				</div>
+				<div>
+					<label for="id_publicador-logo">Logo</label>
+					{{formulario.logo}}
+					{{formulario.logo.errors}}
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Datos del usuario</legend>
+				{% if not user.is_authenticated %}
+					<div>
+						<label for="id_usuarios-username">Usuario</label>
+						{{formulario2.username}}
+						{{formulario2.username.errors}}
+					</div>
+					<div>
+						<label for="id_usuarios-password1">Contraseña</label>
+						{{formulario2.password1}}
+						{{formulario2.password1.errors}}
+					</div>
+					<div>
+						<label for="id_usuarios-password2">Contraseña (confirmar)</label>
+						{{formulario2.password2}}
+						{{formulario2.password2.errors}}
+					</div>
+					<div>
+						<label for="id_usuarios-first_name">Nombre</label>
+						{{formulario2.first_name}}
+						{{formulario2.first_name.errors}}
+					</div>
+					<div>
+						<label for="id_usuarios-last_name">Apellido</label>
+						{{formulario2.last_name}}
+						{{formulario2.last_name.errors}}
+					</div>
+					<div>
+						<label for="id_email">Correo</label>
+						{{formulario2.email}}
+						{{formulario2.email.errors}}
+					</div>
+				{% else %}
+					<span class="information">
+						Ya cuentas con un usuario registrado el mismo sera asociado para ser el administrador del fansub
+					</span>
+					<div>
+						<label for="id_first_name">Nombre</label>
+						{{user.first_name}}
+					</div>
+					<div>
+						<label for="id_last_name">Apellido</label>
+						{{user.last_name}}
+					</div>
+					<div>
+						<label for="id_email">Correo</label>
+						{{user.email}}
+					</div>
+				{% endif%} 
+          	 
+			</fieldset>
+			<div><br>
+          		<span class="infomation">Por favor escriba las 2 palabra de la imagen</span>
+	          	<script type="text/javascript">
+	          	var RecaptchaOptions = {
+	    			theme : 'white'
+	 			};
+	          	</script>
+	            <script type="text/javascript"  
+	            src="http://api.recaptcha.net/challenge?k=6Le-l98SAAAAALHUSp01dPXFP5nkq9f2BMkM6Bm3"> 
+	            </script>  
+	              
+	            <noscript>  
+	            <iframe src="http://api.recaptcha.net/noscript?k=6Le-l98SAAAAALHUSp01dPXFP5nkq9f2BMkM6Bm3"  
+	            height="300" width="600" frameborder="0"></iframe><br>  
+	            <textarea name="recaptcha_challenge_field" rows="3" cols="40">  
+	            </textarea>  
+	            <input type="hidden" name="recaptcha_response_field"   
+	            value="manual_challenge">  
+	            </noscript> 
+			</div>
+			<br>
+			<input type="submit" value="Enviar">
+		</form>
+	</article>
+{% endblock %}

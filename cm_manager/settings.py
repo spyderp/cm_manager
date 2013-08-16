@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Django settings for cm_manager project.
 
 DEBUG = True
@@ -14,7 +15,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'cmmanager',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'PASSWORD': 'archangel',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -42,6 +43,8 @@ USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
+import os
+DIRNAME = os.path.dirname(__file__)
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -50,17 +53,18 @@ MEDIA_ROOT = 'media/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
+ADMIN_MEDIA_PREFIX = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = 'static/'
+STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/desing/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -69,9 +73,8 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     #modificar en produccion
      #"/home/spyder/workspace/python/cm_manager/static"
-    "C:/wamp/www/cm_manager/static/",
-   
-
+     #os.path.join(DIRNAME, "static")
+    "static",
 )
 
 # List of finder classes that know how to find static files in
@@ -121,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.comments',
@@ -141,7 +145,14 @@ AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.OpenIDBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.contrib.messages.context_processors.messages',
+    'social_auth.context_processors.social_auth_by_type_backends',
+)
 #OAuth keys
 TWITTER_CONSUMER_KEY         = 'O4ClkG7rh9wfdDb6GQKAMA'
 TWITTER_CONSUMER_SECRET      = 'UXvixW2dNzB0iRb1h7LPyLiSBD9Awf7VcqJ9N7w'
@@ -156,13 +167,16 @@ FACEBOOK_API_SECRET          = '147e0b01eb52d6a732bd05132140354a'
 #Social Auth
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
-
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'es_ES'}
 
 
-LOGIN_URL = 'login/'
-LOGIN_REDIRECT_URL = '/cuentaUsuario'
+LOGIN_URL          = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL    = '/login/'
+
+SOCIAL_AUTH_FORCE_POST_DISCONNECT = True
+SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next',]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -192,3 +206,8 @@ LOGGING = {
         },
     }
 }
+
+
+# configuración de correo
+EMAIL_FROM="sistema@mangaink.com"
+EMAIL_TO="contacto@mangaink.com"

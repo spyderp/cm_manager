@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+    MangaInk: Fansub
+{% endblock %}
+{% block content %}
+	<h1 class="title4" align="left">Fansub: Lista de grupo de traducción</h1>
+	<div>
+	<p>
+		Puede hacer click para ver los datos del fansub, mienbros y sus publicaciones
+	</p>
+	{% if fansub %}
+	{% for row in fansub %}
+			<article class="fansub">
+				<a href="/fansub/{{row.nombre|slugify}}">
+					<figure>
+						<img src="{{ row.logo.url }}" alt="{{ row.nombre }}" class="logo">
+					</figure>
+					<div class="content">
+						<h4>{{ row.nombre }}</h4>
+						<p>{{row.lema}}</p>
+					</div>
+				</a>
+			</article>
+	{% endfor %}
+	{%else%}
+		<h3> No hay resultados</h3>
+	{% endif %}
+	</div>
+{% endblock %}

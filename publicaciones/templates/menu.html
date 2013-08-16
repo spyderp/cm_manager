@@ -1,0 +1,46 @@
+{% load url from future %}
+{% if user.is_authenticated and user.groups.all.0.id == 2  or user.groups.all.0.id == 3 %}
+	<div class="menuBox">
+			<h3>Menu Fansub<a href="#" class="toggleLink">-</a></h3>
+			<ul class="menu menu-usuario" id="usuarios-registrados">
+				<li><a href="{% url 'administracion.views.userIndex' %}">Pagina del Fansub</a></li>
+				{% if 'administracion.new_user' in user.get_all_permissions %}
+					<li><a href="{% url 'administracion.views.userAdd' %}">Nuevo Usuario</a></li>
+				{%endif%}
+					<li><a href="{% url 'administracion.views.usuarios' %}">Lista de usuarios</a></li>
+					<li><a href="/fansub/new-capitulo">Nuevo capitulo</a></li>
+					<li><a href="/fansub/capitulos">Capitulos Publicados</a></li>
+				{% if 'publicaciones.add_publicacion' in user.get_all_permissions %}
+					<li><a href="/fansub/nueva-publicacion">Solicitar nuevo manga</a></li>
+				{%endif%}
+					<li><a href="/fansub/estadisticas">Ver/buscar Estadisticas</a></li>
+					<li><a href="/fansub/comentarios">Listados de comentarios</a></li>
+				
+			</ul>
+	</div>	
+{% endif %}
+
+<div class="menuBox">
+	<h3>Categorías <a href="#" class="toggleLink">-</a></h3>
+	<ul class="menu" id="categoria">
+		{% for value in categoria %}
+			<li>
+				<a href="/categorias/{{value.nombre}}">{{value.nombre}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+<div class="menuBox">
+	
+	<h3>Genero <a href="#" class="toggleLink">-</a></h3>
+	<ul class="menu" id="genero" >
+		{% for value in tipo %}
+			<li>
+				<a href="/generos/{{value.nombre}}">{{value.nombre}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+
+
+	

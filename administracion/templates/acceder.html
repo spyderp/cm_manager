@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+    MangaInk: Acceso de Usuario
+{% endblock %}
+{% block content %}
+    <h1 class="title2">Acceso al sistema</h1>
+    <article class="boxContent" >
+        <form action="" method="post">
+            {% csrf_token %}
+			<div>
+				<label for="id_password">Usuario</label>
+				{{formulario.username}}
+				{{formulario.username.error}}
+			</div>
+			<div>
+				
+				<label for="id_password">Contraseña</label>
+				{{formulario.password}}
+				{{formulario.password.error}}
+			</div>
+            <input type="submit" value="Enviar">
+        </form>
+    </article>
+{% endblock %}

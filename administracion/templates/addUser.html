@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+    MangaInk: Nuevo usuario de fansub
+{% endblock %}
+{% block content %}
+	<h1 class="title3">Nuevo usuario del Fansub</h1>
+	<article class="boxContent">
+	<p>
+		Llene el siguiente formularios con los datos del usuario. Al finalizar se le enviara un correo con el usuario y la contraseña. Esta última es generada de manera automatica por el sistema y el usuario puede cambiarla luego de acceder a la plataforma.
+	</p>
+	<form id="publicador_form" action="" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div>
+			<label for="id_usuarios-username">Usuario</label>
+			{{formulario.username}}
+			{{formulario.username.errors}}
+		</div>
+		<div>
+			<label for="id_usuarios-first_name">Nombre</label>
+			{{formulario.first_name}}
+			{{formulario.first_name.errors}}
+		</div>
+		<div>
+			<label for="id_usuarios-last_name">Apellido</label>
+			{{formulario.last_name}}
+			{{formulario.last_name.errors}}
+		</div>
+		<div>
+			<label for="id_email">Correo</label>
+			{{formulario.email}}
+			{{formulario.email.errors}}
+		</div>
+		<br>
+		<input type="submit" value="Enviar">
+		</form>
+	</article>
+{% endblock %}

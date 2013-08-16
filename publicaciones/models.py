@@ -26,7 +26,7 @@ class Publicacion(models.Model):
     nombre = models.CharField( max_length=35, unique=True)
     descripcion = models.CharField(max_length=150)
     imagen = models.ImageField("Imagen de la publicacion", upload_to="images/publicacion/", null=False)
-    fecha_creacion = models.DateTimeField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     activo = models.BooleanField(default=False)
     aprobar = models.BooleanField(default=False)
     categoria = models.ForeignKey(Categoria)
@@ -59,7 +59,7 @@ class Sprite(models.Model):
     size = models.IntegerField() 
     alto = models.IntegerField(null=False)
     ancho = models.IntegerField(null=False)
-    fecha_creacion = models.DateTimeField(auto_now=False)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
     capitulo = models.ForeignKey(Capitulo)
 
