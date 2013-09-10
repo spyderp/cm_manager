@@ -1,8 +1,12 @@
+var boxLoad = function(){
+	var url = $(this).attr('href');
+	$.post(url, {}, function(html){
+		$(html).dialog({ modal: true});
+	});
+	
+	return false;
+} 
 
-var redireccion = function(){
-	var url = $(this).data('url');
-	window.location=url;
-}
 var inicio =function(){
 	$("form").jqTransform();
 }
@@ -16,11 +20,17 @@ var menuHidden=function(){
 	}
 
 }
+var redireccion = function(){
+	var url = $(this).data('url');
+	window.location=url;
+}
 var validDelete=function(){
 	var validate=confirm("Esta seguro de borrar este registro, si continua esta acción no se podra revocar");
 	return validate	
 }
 $('a.toggleLink').on('click',menuHidden);
+$('.boxLoad').on('click', boxLoad);
 $('.redirect').on('click',redireccion);
 $('.delete').on('click', validDelete)
 $(document).on('ready', inicio)
+

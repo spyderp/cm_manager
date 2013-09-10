@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 {% load humanize %} 
+{% load staticfiles %}
 {% block title %}
     MangaInk: Fansub {{publicador.nombre}}	
 {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/jquery.mCustomScrollbar.css" %}">
+{% endblock %}
+{% block script %}
+<script>
+	$(document).on('ready', function(){
+		$("#fansubCapitulos .content, #fansubSeries .content").mCustomScrollbar();	
+	})
+</script>
+{% endblock %}
 {% block content %}
+<script src="{% static "js/jquery.mCustomScrollbar.concat.min.js" %}" ></script>
 	<h1 class="title3">Fansub: {{publicador.nombre}}</h1>
 	<p>{{publicador.lema}}</p>
-	<article class="fansubDetalles">
+	<div class="fansubDetalles">
 		<div class="left">
 			<div id="fansubProfile" class="fansubProfile">
 				<figure>
@@ -14,16 +26,21 @@
 				</figure>
 			</div>
 			<div id="fansubUser" class="fansubProfile">
-				<h2>Equipo</h2>
+				<h2>Miembros</h2>
 				<div>
-
 					{% if publicador.user %}
 					<ul>
 
 					{% for usuario in publicador.user.all %}
 						<li>
-							<a href="mailto:{{usuario.email}}">{{usuario.username}}</a> ({{usuario.first_name}} {{usuario.last_name}})	
-							<span clas="hora">{{ usuario.last_login|naturaltime }}</span> 
+							<figure class="left">
+								<img class="imgFansubUser" src="" alt="Imagen de {{usuario.username}}">
+							</figure>
+							<div class="content">
+								<a href="mailto:{{usuario.email}}">{{usuario.username}}</a><br>
+								 {{usuario.first_name}} {{usuario.last_name}}	
+								<!-- <span clas="hora">{{ usuario.last_login|naturaltime }}</span>  -->
+							</div>
 						</li>
 					{% endfor %}	
 					</ul>
@@ -33,11 +50,95 @@
 		</div>
 		<div class="right">
 			<div id="fansubSeries" class="fansubProfile">
-				<h2>Series Publicadas</h2>
+				<div class="content">
+					<div class="listContent">
+						<h3>Nombre de la serie</h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+				</div>
+				<div class="title">
+					<img src="{% static "img/titlefansub2.jpg" %}" alt="Series Publicadas">
+				</div>
 			</div>
 			<div id="fansubCapitulos" class="fansubProfile" >
+				<div class="content">
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+					<div class="listContent">
+						<h3>Nombre de la serie <div class="date">17/08/2013 13:00</div></h3>
+						<div class="text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra mauris sed pretium suscipit. 
+						</div>
+					</div>
+				</div>
 				<h2>Capitulos Publicados</h2>
 			</div>
 		</div>
-	</article>	
+	</div>	
 {% endblock %}
