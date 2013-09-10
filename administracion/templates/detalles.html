@@ -5,40 +5,39 @@
 {% endblock %}
 {% block content %}
 	<h1 class="title3">Fansub: {{publicador.nombre}}</h1>
+	<p>{{publicador.lema}}</p>
 	<article class="fansubDetalles">
-		<div id="fansubProfile" class="fansubProfile">
-			<h2>Datos del Fansub</h2>
-			<div class="logo">
+		<div class="left">
+			<div id="fansubProfile" class="fansubProfile">
 				<figure>
 						<img src="{{ publicador.logo.url }}" alt="{{ publicador.nombre }}" class="logo">
 				</figure>
 			</div>
-			<div class="lema">
-				{{publicador.lema}}
+			<div id="fansubUser" class="fansubProfile">
+				<h2>Equipo</h2>
+				<div>
+
+					{% if publicador.user %}
+					<ul>
+
+					{% for usuario in publicador.user.all %}
+						<li>
+							<a href="mailto:{{usuario.email}}">{{usuario.username}}</a> ({{usuario.first_name}} {{usuario.last_name}})	
+							<span clas="hora">{{ usuario.last_login|naturaltime }}</span> 
+						</li>
+					{% endfor %}	
+					</ul>
+					{%endif%}
+				</div>
 			</div>
 		</div>
-		<div id="fansubUser" class="fansubProfile">
-			<h2>Equipo</h2>
-			<div>
-
-				{% if publicador.user %}
-				<ul>
-
-				{% for usuario in publicador.user.all %}
-					<li>
-						<a href="mailto:{{usuario.email}}">{{usuario.username}}</a> ({{usuario.first_name}} {{usuario.last_name}})	
-						<span clas="hora">{{ usuario.last_login|naturaltime }}</span> 
-					</li>
-				{% endfor %}	
-				</ul>
-				{%endif%}
+		<div class="right">
+			<div id="fansubSeries" class="fansubProfile">
+				<h2>Series Publicadas</h2>
 			</div>
-		</div>
-		<div id="fansubSeries" class="fansubProfile">
-			<h2>Series Publicadas</h2>
-		</div>
-		<div id="fansubCapitulos" class="fansubProfile" >
-			<h2>Capitulos Publicados</h2>
+			<div id="fansubCapitulos" class="fansubProfile" >
+				<h2>Capitulos Publicados</h2>
+			</div>
 		</div>
 	</article>	
 {% endblock %}
