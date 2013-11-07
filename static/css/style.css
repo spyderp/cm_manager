@@ -480,29 +480,34 @@ form input[type="text"], form input[type="email"], form input[type="password"]{
 	padding: 3px;
 	width: 25%;
 }
-
+.ui-dialog form input[type="text"], .ui-dialog form input[type="email"], .ui-dialog form input[type="password"]{
+	width: 50%;
+}
 form label{
 	display: inline-block;
 	margin-bottom: 1%;
 	width: 15%;
 	font-weight: bold;
-	color: #444;
+	color: #000;
+}
+.ui-dialog  form label{
+	width: 40%;
 }
 form textarea{
 	border: 1px solid #3F82D0;
 	padding: 3px;
 }
 button, input[type="submit"], input[type="button"]{
-	background: #7e858c;
-	border-radius:3px;
-	border: none;
-	color: #fff;
+	background: #d4d4d4;
+	border: 1px solid #d4d4d4;
+	color: #525252;
 	font-weight: bold;
 	padding: 3px 7px;
-	transition: all 1s linear;
 }
 button:hover, input[type="submit"]:hover{
-	background: #3a3737;	
+	border: 1px solid #3f82d0;
+	background: #3869a0;	
+	color: #fff;
 }
 
 form.jqtransformdone div.rowElem{

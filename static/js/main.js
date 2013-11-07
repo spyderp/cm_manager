@@ -1,7 +1,9 @@
+var csrftoken = $.cookie('csrftoken');
 var boxLoad = function(){
 	var url = $(this).attr('href');
-	$.post(url, {}, function(html){
-		$(html).dialog({ modal: true});
+	var title= $(this).data('title');
+	$.get(url, {}, function(html){
+		$('#modalbox').html(html).attr('title', title).dialog({ modal: true});
 	});
 	
 	return false;
@@ -28,6 +30,18 @@ var validDelete=function(){
 	var validate=confirm("Esta seguro de borrar este registro, si continua esta acción no se podra revocar");
 	return validate	
 }
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    crossDomain: false, // obviates need for sameOrigin test
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type)) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
 $('a.toggleLink').on('click',menuHidden);
 $('.boxLoad').on('click', boxLoad);
 $('.redirect').on('click',redireccion);

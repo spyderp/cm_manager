@@ -1,6 +1,5 @@
 {% block content %}
-    <h1 class="title2">Acceso al sistema</h1>
-    <article class="boxContent" >
+    <article >
         <form action="" method="post">
             {% csrf_token %}
 			<div>
@@ -14,7 +13,10 @@
 				{{formulario.password}}
 				{{formulario.password.error}}
 			</div>
-            <input type="submit" value="Enviar">
+			<div align="right" style="padding-top:12px;">
+				 <input type="submit" value="Enviar">
+			</div>
+           
         </form>
     </article>
 {% endblock %}

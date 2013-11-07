@@ -8,11 +8,12 @@
 	<title>{% block title %}{% endblock %}</title>
 	<link rel="stylesheet" href="{% static "css/normalize.css" %}">
 	<link rel="stylesheet" href="{% static "css/style.css" %}">
-	<link rel="stylesheet" href="{% static "css/jquery-ui-1.10.3.custom.css" %}">
+	<link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
 	{% block css %}{% endblock %}
 	<script src="{% static "js/prefixfree.min.js" %}" ></script>
 	<script src="{% static "js/jquery.js" %}" ></script>
-	<script src="{% static "js/jquery-ui-1.10.3.custom.min.js" %}" ></script>
+	<script src="{% static "js/jquery.cookie.js" %}" ></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js " ></script>
 	<script src="{% static "js/jquery.jqTransform.js" %}" ></script>
 	
 <body>
@@ -48,7 +49,7 @@
 				<li><a href="/generos/">Generos</a></li>
 				<li><a href="/fansub/">FANSUBS</a></li>
 				<li><a href="/registro/">Registro de FANSUBS</a></li>
-				<li><a class="boxLoad" href="/acceso/">Acceso</a></li>
+				<li><a class="boxLoad" data-title="Acceso al sistema" href="/acceso/">Acceso</a></li>
 				<li><a href="/contactos/">Contáctenos</a></li>
 			</ul>
 		</nav>
@@ -82,5 +83,6 @@
 	</footer>
 	<script src="{% static "js/main.js" %}" ></script>
 	{% block script %}{% endblock %}
+<div id='modalbox'></div>
 </body>
 </html>
