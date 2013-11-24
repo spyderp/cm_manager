@@ -3,9 +3,17 @@ var boxLoad = function(){
 	var url = $(this).attr('href');
 	var title= $(this).data('title');
 	$.get(url, {}, function(html){
-		$('#modalbox').html(html).attr('title', title).dialog({ modal: true});
+		$('#modalbox').html(html).attr('title', title).dialog({ modal: true, 
+																show: {
+															        effect: "blind",
+															        duration: 1000
+															    }, 
+															 });
+		$('#loginForm').ajaxForm({
+			dataType: 'json',
+			success:  loginSuccess,
+		});
 	});
-	
 	return false;
 } 
 
@@ -22,6 +30,18 @@ var menuHidden=function(){
 	}
 
 }
+var loginSuccess = function(data){
+	if(data[0].result==1){
+		$('.flashBox').html('<div class="flashMessage success">'+data[0].msg+'</div>');
+		setTimeout(function(){window.location='/';}, 1500);
+	}else if(data[0].result==0){
+		$('.flashBox').html('<div class="flashMessage error">'+data[0].msg+'</div>');
+	}else if(data[0].result==2){
+		$('.flashBox').html('<div class="flashMessage info">'+data[0].msg+'</div>');
+		setTimeout(function(){window.location='/';}, 1500);
+	}
+}
+
 var redireccion = function(){
 	var url = $(this).data('url');
 	window.location=url;

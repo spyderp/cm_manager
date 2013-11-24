@@ -15,7 +15,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'cmmanager',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'PASSWORD': 'archangel',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -168,9 +168,9 @@ FACEBOOK_API_SECRET          = '147e0b01eb52d6a732bd05132140354a'
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
-FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'es_ES'}
-
-
+FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'es_ES', 'fields': 'picture'}
+FACEBOOK_EXTRA_DATA = [('profile', 'profile')]
+TWITTER_EXTRA_DATA = [('profile_image_url', 'profile_picture')]
 LOGIN_URL          = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/login/'

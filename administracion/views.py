@@ -6,9 +6,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required, permission_required
-from administracion.models import *
+from django.utils import simplejson
+from django.http import HttpResponse
 
 def acceso(request):
+	result = []
 	if request.user.is_authenticated():
 		messages.info(request, "Ya se encuentra autenticado")
 		return redirect('/')
@@ -20,12 +22,12 @@ def acceso(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				messages.success(request, "Bienvenido su acceso ha sido exitoso")
-				return redirect('/')
-			else:
-				messages.warning(request, "Su cuenta se encuentra desactivada por favor contacte con la administracion de la web")           
+				result.append({'result':1, 'msg':"Bienvenido su acceso ha sido exitoso"})
+			else:           
+				result.append({'result':0, 'msg':"Su cuenta se encuentra desactivada por favor contacte con la administracion de la web"})
 		else:
-			messages.error(request, "Su usuario o contrasena son incorrecto, Por favor intente nuevamente")
+			result.append({'result':0, 'msg':"Su usuario o contrasena son incorrecto, Por favor intente nuevamente"})
+		return HttpResponse(simplejson.dumps(result), mimetype='application/json')	
 	else:
 		formulario = AuthenticationForm()		
 	return render_to_response('acceder.html', {'formulario':formulario}, RequestContext(request))

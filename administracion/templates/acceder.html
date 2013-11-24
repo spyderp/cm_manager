@@ -1,6 +1,7 @@
 {% block content %}
+	<div class="flashBox"></div>
     <article >
-        <form action="" method="post">
+        <form id="loginForm" action="/acceso/" method="post">
             {% csrf_token %}
 			<div>
 				<label for="id_password">Usuario</label>
